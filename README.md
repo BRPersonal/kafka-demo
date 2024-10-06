@@ -27,17 +27,17 @@ gradle bootRun
 
 Go to postman and do a post 
 POST http://localhost:8080/api/v1/messages
-Send a string as Body raw
-This is my first message
+Send a student json as Body raw
+{
+"id":1,
+"firstName": "john",
+"lastName": "doe"
+}
+
 You will get http status 200 with message "message queued successfully"
+In the log, you should see the consumer message like this
 
-Start kafka consumer from the terminal. Go to your
-kafka server installation and run (software installed at /Users/adiyen/software/kafka_2.13-3.1.0)
-bin/kafka-console-consumer.sh --topic simple --from-beginning --bootstrap-server localhost:9092
-This is my first message
+com.simplemind.kafka.service.impl.KafkaConsumer: consuming message :Student(id=1, firstName=john, lastName=doe)
+That's it. You have successfully tested the demo app. Congrats
 
-The consumer in the terminal will display that message.
-Note that if you stop the consumer client and run it again,
-you will get all the messages starting from the first message. 
-I think there will be a default message expiry and until then message
-will be persisted in message broker.
+
